@@ -1,0 +1,24 @@
+<html>
+<head>
+</head>
+<body>
+<img src='gif3.gif' id='gif_image'/>
+</body>
+
+<script>
+console.log("Script called");
+
+var gifList = ["gif1.gif", "gif2.gif", "gif3.gif"];
+var i = 0;
+setInterval(() => {
+    i = i % gifList.length;
+    console.log("i = " + i);
+    var currentGifName = gifList[i];
+    console.log(currentGifName)
+    var gifImage = document.getElementById('gif_image');
+    gifImage.src = "";
+    gifImage.src = currentGifName;
+    i = i + 1;
+}, 15000)
+</script>
+</html>

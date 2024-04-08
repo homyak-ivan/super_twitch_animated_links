@@ -1,0 +1,68 @@
+<html>
+<head>
+<style>
+@keyframes rotation {
+    0% {
+        transform:rotate(0rad);
+    }
+    25% {
+        transform:rotate(0.05rad);
+    }
+    50% {
+        transform:rotate(0rad);
+    }
+    75% {
+        transform:rotate(-0.05rad);
+    }
+    100% {
+        transform:rotate(0rad);
+    }
+}
+
+    #gif_image {
+      animation-name: rotation;
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      position: relative;
+    }
+</style>
+</head>
+<body>
+<img src='' id='gif_image'/>
+</body>
+
+<script>
+var gifList = ["link_tg.PNG", "link_youtube.PNG", "link_twitch.PNG"];
+var i = 0;
+gif_image.style.top = "1080px"
+
+setInterval(() => {
+   i = i % gifList.length;
+   var currentGifName = gifList[i];
+   var gifImage = document.getElementById('gif_image');
+   gifImage.src = "";
+   gifImage.src = currentGifName;
+   i = i + 1;
+   let start = Date.now();
+   let appearAnimation = setInterval(function() {
+      let timePassed = Date.now() - start;
+      gif_image.style.top = 1080 - timePassed + 'px';
+      if (timePassed > 1000) {
+          clearInterval(appearAnimation);
+      }
+   }, 10);
+   setTimeout(() => {
+       let disappearStart = Date.now();
+       let disappearAnimation = setInterval(function() {
+          let timePassed = Date.now() - disappearStart;
+          gif_image.style.top = timePassed + 'px';
+          if (timePassed > 1200) {
+              clearInterval(disappearAnimation);
+          }
+       }, 10);
+   }, 12000);
+}, 20 * 60 * 1000);
+
+</script>
+</html>

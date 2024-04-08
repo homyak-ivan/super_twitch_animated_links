@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Циклические Гифки</title>
+<style>
+  .gif-container { display: none; width: 100%; max-width: 1920px; height: auto; }
+  body { display: flex; justify-content: center; align-items: center; height: 100vh; }
+</style>
+</head>
+<body>
+<div id="gif-0" class="gif-container"><img id="gif-item-0" src="gif1.gif" alt="Гифка 1"></div>
+<div id="gif-1" class="gif-container"><img id="gif-item-1" src="gif2.gif" alt="Гифка 2"></div>
+<div id="gif-2" class="gif-container"><img id="gif-item-2" src="gif3.gif" alt="Гифка 3"></div>
+
+<script>
+  let counter = 0; // Счетчик для определения текущей гифки
+  const totalGifs = 3; // Общее количество гифок
+
+  // Функция для показа гифки в соответствии с текущим счетчиком
+  function showCurrentGif() {
+    // Скрываем все гифки
+    for (let i = 0; i < totalGifs; i++) {
+      document.getElementById('gif-' + i).style.display = 'none';
+    }
+
+    // Вычисляем индекс текущей гифки и показываем её
+    const currentGifIndex = counter % totalGifs;
+    document.getElementById('gif-' + currentGifIndex).style.display = 'block';
+    document.getElementById('gif-item-' + currentGifIndex).src = document.getElementById('gif-item-' + currentGifIndex).src;
+
+    // Увеличиваем счетчик для следующего шага
+    counter++;
+  }
+
+  // Начальный вызов функции для отображения первой гифки
+  showCurrentGif();
+
+  // Устанавливаем интервал для циклического показа гифок каждые 20 минут
+  setInterval(showCurrentGif, 20000);
+</script>
+</body>
+</html>

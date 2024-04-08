@@ -1,0 +1,60 @@
+<html>
+<head>
+<style>
+    #gif_image {
+      position: relative;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<img src='' id='gif_image'/>
+</body>
+
+<script>
+console.log("Script called");
+
+var gifList = ["link_tg.PNG", "link_youtube.PNG", "link_twitch.PNG"];
+var i = 0;
+
+setInterval(() => {
+   i = i % gifList.length;
+   var currentGifName = gifList[i];
+   var gifImage = document.getElementById('gif_image');
+   gifImage.src = "";
+   gifImage.src = currentGifName;
+   gif_image.style.rotate = "0rad"
+   i = i + 1;
+
+   let start = Date.now();
+   var isDisappearing = false
+   let appearAnimation = setInterval(function() {
+       let timePassed = Date.now() - start;
+       gif_image.style.top = 1080 - timePassed + 'px';
+       if (timePassed > 1000) {
+         clearInterval(appearAnimation);
+         var shakeStartTime = Date.now();
+         let shareTransformation = setInterval(function() {
+           let timePassed = Date.now() - shakeStartTime;
+	   let phaseValue = timePassed % 1000;
+           let radian = 0.1 * Math.sin(timePassed * 0.00123);
+           gif_image.style.rotate = radian + "rad";
+           if (timePassed > 12000) clearInterval(shareTransformation);
+           if (!isDisappearing && timePassed > 10000) {
+               isDisappearing = true;
+               let disappearStartTime = Date.now();
+               let disappearAnimation = setInterval(function() {
+	          let timePassed = Date.now() - disappearStartTime;
+                  gif_image.style.top = timePassed + 'px';
+                  if (timePassed > 2000) {
+                      clearInterval(disappearAnimation);
+                      isDisappearing = false;
+                  }
+               }, 10)
+           }
+         }, 10)
+       }
+   }, 10)
+}, 15000)
+</script>
+</html>
